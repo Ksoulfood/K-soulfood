@@ -38,21 +38,23 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* 포장마차 천막 줄무늬 - 상단 */
+    /* 포장마차 천막 줄무늬 - 상단 (둥근 스캘럽) */
     .tent {
       position: relative;
-      height: 56px;
+      height: 60px;
       background: repeating-linear-gradient(
         90deg,
-        var(--red) 0 28px,
-        var(--cream) 28px 56px
+        var(--red) 0 32px,
+        var(--cream) 32px 64px
       );
-      clip-path: polygon(
-        0 0, 100% 0, 100% 60%,
-        96% 100%, 88% 60%, 80% 100%, 72% 60%, 64% 100%, 56% 60%,
-        48% 100%, 40% 60%, 32% 100%, 24% 60%, 16% 100%, 8% 60%, 4% 100%, 0 60%
-      );
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      --scallop: 16px;
+      -webkit-mask:
+        linear-gradient(#000, #000) top/100% calc(100% - var(--scallop)) no-repeat,
+        radial-gradient(circle var(--scallop) at 50% 0, #000 98%, transparent 100%) bottom/32px var(--scallop) repeat-x;
+      mask:
+        linear-gradient(#000, #000) top/100% calc(100% - var(--scallop)) no-repeat,
+        radial-gradient(circle var(--scallop) at 50% 0, #000 98%, transparent 100%) bottom/32px var(--scallop) repeat-x;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
     }
 
     /* 매달린 전구 줄 */
@@ -95,20 +97,17 @@
       text-align: center;
     }
 
-    /* 네온 한글 사인 */
-    .neon {
-      font-family: 'Black Han Sans', 'Noto Sans KR', sans-serif;
-      font-size: clamp(36px, 11vw, 56px);
-      letter-spacing: 4px;
-      color: #fff4dc;
-      text-shadow:
-        0 0 4px #fff,
-        0 0 10px #ffd166,
-        0 0 22px var(--orange),
-        0 0 40px var(--red),
-        0 0 70px var(--red);
-      margin: 18px 0 6px;
-      line-height: 1.05;
+    /* 메인 로고 (헤더) */
+    .hero-logo {
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      margin: 22px auto 8px;
+      filter:
+        drop-shadow(0 0 6px rgba(255, 209, 102, 0.35))
+        drop-shadow(0 0 14px rgba(244, 124, 32, 0.25))
+        drop-shadow(0 4px 10px rgba(0,0,0,0.45));
     }
     .neon-sub {
       font-family: 'Bebas Neue', sans-serif;
@@ -119,41 +118,16 @@
       margin: 0 0 22px;
     }
 
-    /* 로고 영역 */
-    .logo-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255, 244, 220, 0.12);
-      border-radius: 18px;
-      padding: 22px 18px;
-      backdrop-filter: blur(4px);
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.45),
-        inset 0 0 0 1px rgba(255,255,255,0.03);
-      margin-bottom: 26px;
-    }
-    .logo {
-      width: 100%;
-      max-width: 320px;
-      height: auto;
-      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.55));
-      display: block;
-      margin: 0 auto;
-    }
+    /* 로고 폴백 */
     .logo-fallback {
       font-family: 'Black Han Sans', sans-serif;
       font-size: clamp(34px, 9vw, 48px);
       letter-spacing: 2px;
+      margin: 22px auto 8px;
     }
     .logo-fallback .k { color: var(--blue); }
     .logo-fallback .soul { color: var(--orange); }
     .logo-fallback .food { color: var(--red); }
-
-    .tagline {
-      margin-top: 12px;
-      font-size: 14px;
-      color: #ffe9c2;
-      opacity: 0.85;
-    }
 
     /* 메뉴 버튼 */
     .menu-label {
@@ -205,13 +179,26 @@
     .btn-text { text-align: left; }
 
     .btn-ko {
-      background: linear-gradient(135deg, #1f4fa8 0%, #2c6ad1 100%);
-      box-shadow: 0 8px 22px rgba(31, 79, 168, 0.45), inset 0 0 0 1px rgba(255,255,255,0.08);
+      background: transparent;
+      border-color: #2c6ad1;
+      color: #e6f0ff;
+      box-shadow:
+        0 0 0 1px rgba(44, 106, 209, 0.4) inset,
+        0 0 14px rgba(44, 106, 209, 0.25),
+        0 0 22px rgba(44, 106, 209, 0.15);
     }
+    .btn-ko:hover { box-shadow: 0 0 0 1px rgba(44,106,209,0.5) inset, 0 0 18px rgba(44,106,209,0.4); }
+
     .btn-en {
-      background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
-      box-shadow: 0 8px 22px rgba(230, 48, 39, 0.4), inset 0 0 0 1px rgba(255,255,255,0.1);
+      background: transparent;
+      border-color: var(--orange);
+      color: #ffe1bf;
+      box-shadow:
+        0 0 0 1px rgba(244, 124, 32, 0.4) inset,
+        0 0 14px rgba(244, 124, 32, 0.25),
+        0 0 22px rgba(230, 48, 39, 0.15);
     }
+    .btn-en:hover { box-shadow: 0 0 0 1px rgba(244,124,32,0.5) inset, 0 0 18px rgba(244,124,32,0.4); }
 
     .btn[aria-disabled="true"] {
       filter: grayscale(0.4) brightness(0.85);
@@ -275,21 +262,16 @@
   </div>
 
   <main class="wrap">
-    <h1 class="neon">포장마차</h1>
-    <p class="neon-sub">KOREAN STREET FOOD</p>
-
-    <div class="logo-card">
-      <img
-        src="assets/logo.webp"
-        alt="K-Soul Food"
-        class="logo"
-        onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block';"
-      />
-      <div id="logo-fallback" class="logo-fallback" style="display:none;">
-        <span class="k">K</span> <span class="soul">SOUL</span> <span class="food">FOOD</span>
-      </div>
-      <p class="tagline">한입에 담은 한국의 밤거리</p>
+    <img
+      src="assets/logo.webp"
+      alt="K-Soul Food"
+      class="hero-logo"
+      onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block';"
+    />
+    <div id="logo-fallback" class="logo-fallback" style="display:none;">
+      <span class="k">K</span> <span class="soul">SOUL</span> <span class="food">FOOD</span>
     </div>
+    <p class="neon-sub">AUTHENTIC KOREAN POCHA</p>
 
     <p class="menu-label">MENU</p>
 
