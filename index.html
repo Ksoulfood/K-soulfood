@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>K-Soul Food · 포장마차 메뉴</title>
+  <meta name="description" content="K-Soul Food 포장마차 메뉴 · Korean Street Food Menu" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Bebas+Neue&family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0b1020;
+      --navy-2: #131a35;
+      --blue: #1f4fa8;
+      --orange: #f47c20;
+      --red: #e63027;
+      --cream: #fff4dc;
+      --neon-glow: 0 0 6px rgba(255, 230, 150, 0.6), 0 0 18px rgba(244, 124, 32, 0.55), 0 0 36px rgba(230, 48, 39, 0.35);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(244, 124, 32, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 50% 110%, rgba(31, 79, 168, 0.25), transparent 60%),
+        linear-gradient(180deg, #0a0e1f 0%, #0b1020 50%, #08091a 100%);
+      min-height: 100svh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 포장마차 천막 줄무늬 - 상단 */
+    .tent {
+      position: relative;
+      height: 56px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--red) 0 28px,
+        var(--cream) 28px 56px
+      );
+      clip-path: polygon(
+        0 0, 100% 0, 100% 60%,
+        96% 100%, 88% 60%, 80% 100%, 72% 60%, 64% 100%, 56% 60%,
+        48% 100%, 40% 60%, 32% 100%, 24% 60%, 16% 100%, 8% 60%, 4% 100%, 0 60%
+      );
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    /* 매달린 전구 줄 */
+    .bulbs {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding: 0 12px;
+      margin-top: -2px;
+    }
+    .bulb {
+      width: 14px; height: 18px;
+      background: radial-gradient(circle at 50% 35%, #fff7c8 0%, #ffd166 45%, #b86b00 100%);
+      border-radius: 50% 50% 45% 45%;
+      box-shadow: 0 0 10px #ffd166, 0 0 22px rgba(255, 209, 102, 0.55);
+      animation: flicker 3.6s infinite ease-in-out;
+      transform-origin: top center;
+    }
+    .bulb::before {
+      content: "";
+      display: block;
+      width: 2px; height: 8px;
+      background: #444;
+      margin: -8px auto 0;
+    }
+    .bulb:nth-child(odd) { animation-delay: -1.2s; }
+    .bulb:nth-child(3n)  { animation-delay: -2.4s; }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      45% { opacity: 0.92; }
+      48% { opacity: 0.5; }
+      50% { opacity: 1; }
+      72% { opacity: 0.88; }
+    }
+
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 28px 22px 40px;
+      text-align: center;
+    }
+
+    /* 네온 한글 사인 */
+    .neon {
+      font-family: 'Black Han Sans', 'Noto Sans KR', sans-serif;
+      font-size: clamp(36px, 11vw, 56px);
+      letter-spacing: 4px;
+      color: #fff4dc;
+      text-shadow:
+        0 0 4px #fff,
+        0 0 10px #ffd166,
+        0 0 22px var(--orange),
+        0 0 40px var(--red),
+        0 0 70px var(--red);
+      margin: 18px 0 6px;
+      line-height: 1.05;
+    }
+    .neon-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 6px;
+      font-size: clamp(13px, 3.4vw, 16px);
+      color: #ffd9a8;
+      text-shadow: 0 0 8px rgba(244,124,32,0.7);
+      margin: 0 0 22px;
+    }
+
+    /* 로고 영역 */
+    .logo-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255, 244, 220, 0.12);
+      border-radius: 18px;
+      padding: 22px 18px;
+      backdrop-filter: blur(4px);
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.45),
+        inset 0 0 0 1px rgba(255,255,255,0.03);
+      margin-bottom: 26px;
+    }
+    .logo {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.55));
+      display: block;
+      margin: 0 auto;
+    }
+    .logo-fallback {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(34px, 9vw, 48px);
+      letter-spacing: 2px;
+    }
+    .logo-fallback .k { color: var(--blue); }
+    .logo-fallback .soul { color: var(--orange); }
+    .logo-fallback .food { color: var(--red); }
+
+    .tagline {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #ffe9c2;
+      opacity: 0.85;
+    }
+
+    /* 메뉴 버튼 */
+    .menu-label {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 8px;
+      font-size: 14px;
+      color: #ffd9a8;
+      margin: 8px 0 14px;
+      opacity: 0.85;
+    }
+    .menu-label::before, .menu-label::after {
+      content: "—";
+      margin: 0 10px;
+      opacity: 0.6;
+    }
+
+    .buttons {
+      display: grid;
+      gap: 14px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+      border: 2px solid transparent;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 64px;
+      letter-spacing: 0.5px;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn .flag { font-size: 26px; line-height: 1; }
+    .btn .sub {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+    .btn-text { text-align: left; }
+
+    .btn-ko {
+      background: linear-gradient(135deg, #1f4fa8 0%, #2c6ad1 100%);
+      box-shadow: 0 8px 22px rgba(31, 79, 168, 0.45), inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+    .btn-en {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+      box-shadow: 0 8px 22px rgba(230, 48, 39, 0.4), inset 0 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    .btn[aria-disabled="true"] {
+      filter: grayscale(0.4) brightness(0.85);
+      cursor: not-allowed;
+    }
+
+    .notice {
+      margin-top: 22px;
+      font-size: 12px;
+      color: #ffd9a8;
+      opacity: 0.6;
+      line-height: 1.6;
+    }
+
+    /* 하단 천막 */
+    .tent-bottom {
+      margin-top: 28px;
+      height: 28px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--red) 0 22px,
+        var(--cream) 22px 44px
+      );
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 -4px 14px rgba(0,0,0,0.3);
+      opacity: 0.85;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 16px 26px;
+      font-size: 11px;
+      color: #ffd9a8;
+      opacity: 0.5;
+      letter-spacing: 1px;
+    }
+
+    /* 별빛 효과 */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 40% 70%, rgba(255,209,102,0.5), transparent),
+        radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.35), transparent),
+        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.4), transparent);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="tent" aria-hidden="true"></div>
+  <div class="bulbs" aria-hidden="true">
+    <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+    <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+    <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  </div>
+
+  <main class="wrap">
+    <h1 class="neon">포장마차</h1>
+    <p class="neon-sub">KOREAN STREET FOOD</p>
+
+    <div class="logo-card">
+      <img
+        src="assets/logo.webp"
+        alt="K-Soul Food"
+        class="logo"
+        onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block';"
+      />
+      <div id="logo-fallback" class="logo-fallback" style="display:none;">
+        <span class="k">K</span> <span class="soul">SOUL</span> <span class="food">FOOD</span>
+      </div>
+      <p class="tagline">한입에 담은 한국의 밤거리</p>
+    </div>
+
+    <p class="menu-label">MENU</p>
+
+    <div class="buttons">
+      <a class="btn btn-ko" href="menu-ko.pdf" target="_blank" rel="noopener">
+        <span class="flag">🇰🇷</span>
+        <span class="btn-text">
+          한국어 메뉴
+          <span class="sub">KOREAN MENU</span>
+        </span>
+      </a>
+
+      <a class="btn btn-en" href="menu-en.pdf" target="_blank" rel="noopener">
+        <span class="flag">🇺🇸</span>
+        <span class="btn-text">
+          English Menu
+          <span class="sub">영문 메뉴</span>
+        </span>
+      </a>
+    </div>
+
+    <p class="notice">
+      버튼을 누르면 메뉴 PDF가 열립니다<br/>
+      Tap a button to open the menu PDF
+    </p>
+  </main>
+
+  <div class="tent-bottom" aria-hidden="true"></div>
+
+  <footer>© K-SOUL FOOD</footer>
+</body>
+</html>
